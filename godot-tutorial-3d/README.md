@@ -1,3 +1,3 @@
 This is [Godot's](https://godotengine.org) [3D tutorial project](https://docs.godotengine.org/en/stable/getting_started/first_3d_game/index.html) made with Godot 4.2. There are a couple of customizations and checks added compared to the original. However, I was able to follow the tutorial smoothfully regardless of it not being confirmed it'll work on Godot 4.2.
 
-**Warning** - Collision boxes and camera view is a bit wonky in this version. I need to go back and improve these. This entire project is just for testing and learning Godot!
+**Warning** - Collision boxes and camera view are a bit wonky/messy in this version. I need to go back and improve these. This entire project is just for testing and learning Godot!
