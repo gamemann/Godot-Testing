@@ -4,7 +4,7 @@ extends CharacterBody3D
 @export var max_speed = 18
 
 signal squashed
-
+	
 func _physics_process(_delta):
 	move_and_slide()
 	
@@ -21,6 +21,9 @@ func initialize(start_position, player_position):
 	velocity = Vector3.FORWARD * rand_speed
 	
 	velocity = velocity.rotated(Vector3.UP, rotation.y)
+	
+	# Set more accurate animation speeds.
+	$AnimationPlayer.speed_scale = rand_speed / min_speed
 
 func _on_visible_on_screen_enabler_3d_screen_exited():
 	queue_free()
