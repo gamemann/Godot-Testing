@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://c82q06omkqyw"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ng6bp"]
+albedo_color = Color(0.223529, 0, 0.396078, 1)
+
+[sub_resource type="PrismMesh" id="PrismMesh_av4rm"]
+material = SubResource("StandardMaterial3D_ng6bp")
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_nmru7"]
+data = PackedVector3Array(0, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0, 0.5, 0.5, 0, 0.5, -0.5, 0.5, -0.5, 0.5, 0, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0, 0.5, -0.5, 0, 0.5, 0.5, -0.5, -0.5, -0.5, 0, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
+
+[node name="SurfRamp" type="Node3D"]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 5.35129, 0, 0, 0)
+mesh = SubResource("PrismMesh_av4rm")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 5.35129, 0, 0, 0)
+shape = SubResource("ConcavePolygonShape3D_nmru7")

@@ -1,0 +1,87 @@
+[gd_scene load_steps=13 format=3 uid="uid://bf6gsbs8xs4qt"]
+
+[ext_resource type="PackedScene" uid="uid://bcdpgwi2scpkj" path="res://source_movement_godot_4-main/player.tscn" id="1_lr13n"]
+[ext_resource type="Script" path="res://main.gd" id="1_w5jem"]
+[ext_resource type="Texture2D" uid="uid://bn8267ksk6u8h" path="res://images/HD-wallpaper-square-orange-boxes-abstract-thumbnail.jpg" id="3_wde2l"]
+[ext_resource type="PackedScene" uid="uid://bfiddvrtalygx" path="res://props/step.tscn" id="4_5ibce"]
+
+[sub_resource type="PortableCompressedTexture2D" id="PortableCompressedTexture2D_isdcn"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_sji7x"]
+normal_texture = SubResource("PortableCompressedTexture2D_isdcn")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_akhqk"]
+albedo_texture = ExtResource("3_wde2l")
+metallic_specular = 1.0
+emission = Color(0, 0.917647, 0, 1)
+normal_scale = 2.85
+clearcoat = 0.15
+clearcoat_roughness = 0.44
+anisotropy = 1.0
+heightmap_scale = -4.035
+subsurf_scatter_strength = 0.6
+backlight = Color(1, 0, 0, 1)
+backlight_texture = SubResource("CanvasTexture_sji7x")
+uv1_scale = Vector3(100, 100, 100)
+uv1_triplanar = true
+proximity_fade_distance = 36.35
+distance_fade_min_distance = 32.6
+distance_fade_max_distance = 0.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_yq6e6"]
+material = SubResource("StandardMaterial3D_akhqk")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6gd5p"]
+size = Vector3(229.893, 1, 175.185)
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_pb677"]
+
+[sub_resource type="Sky" id="Sky_s1hid"]
+sky_material = SubResource("PanoramaSkyMaterial_pb677")
+
+[sub_resource type="Environment" id="Environment_hq1ds"]
+background_mode = 2
+sky = SubResource("Sky_s1hid")
+
+[node name="Main" type="Node"]
+script = ExtResource("1_w5jem")
+
+[node name="Player" parent="." instance=ExtResource("1_lr13n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11.4974, 0)
+
+[node name="Ground" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0324361, -0.963377, 0.109411)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(230.285, 0, 0, 0, 1, 0, 0, 0, 175.399, 0, 0, 0)
+mesh = SubResource("BoxMesh_yq6e6")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0435941, 0, 0.103598)
+shape = SubResource("BoxShape3D_6gd5p")
+
+[node name="Props" type="Node" parent="."]
+
+[node name="Step" parent="Props" instance=ExtResource("4_5ibce")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.280114, 0)
+
+[node name="Step2" parent="Props" instance=ExtResource("4_5ibce")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0336599, -0.954065)
+
+[node name="Step3" parent="Props" instance=ExtResource("4_5ibce")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.24142, 0.541308, -0.954065)
+
+[node name="Step4" parent="Props" instance=ExtResource("4_5ibce")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.24142, 1.24765, -2.90032)
+
+[node name="Step5" parent="Props" instance=ExtResource("4_5ibce")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.43614, 1.85033, -2.90032)
+
+[node name="World" type="Node" parent="."]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 0.848279, 0.529549, 0, -0.529549, 0.848279, 0, 9.5651, 20.833)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="World"]
+environment = SubResource("Environment_hq1ds")

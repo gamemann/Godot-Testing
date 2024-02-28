@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://bcdpgwi2scpkj"]
+
+[ext_resource type="Script" path="res://source_movement_godot_4-main/player_source_movement.gd" id="1_04hbr"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_b2p7p"]
+radius = 0.1
+height = 0.6
+
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("cam_pivot")]
+floor_stop_on_slope = false
+floor_block_on_wall = false
+floor_max_angle = 0.802851
+script = ExtResource("1_04hbr")
+cam_pivot = NodePath("CameraPivot")
+
+[node name="CameraPivot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.878542, 0)
+
+[node name="Camera3D" type="Camera3D" parent="CameraPivot"]
+fov = 90.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+shape = SubResource("CapsuleShape3D_b2p7p")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
+shape = SubResource("CapsuleShape3D_b2p7p")
