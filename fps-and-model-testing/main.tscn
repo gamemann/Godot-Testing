@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://cxjekay1a1b7d"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_ey68o"]
+[ext_resource type="PackedScene" uid="uid://cbvkretx64o3f" path="res://player.tscn" id="2_htw4r"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_jclat"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_apasw"]
+points = PackedVector3Array(0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5)
+
+[node name="Main" type="Node"]
+script = ExtResource("1_ey68o")
+player = ExtResource("2_htw4r")
+
+[node name="Ground" type="StaticBody3D" parent="."]
+transform = Transform3D(3.96449, 0, 0, 0, 1, 0, 0, 0, 4.363, 0, 0, 0)
+collision_mask = 0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(4.46919, 0, 0, 0, 0.204397, 0, 0, 0, 6.34047, 0, 0, 0)
+mesh = SubResource("BoxMesh_jclat")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
+transform = Transform3D(4.46919, 0, 0, 0, 0.204397, 0, 0, 0, 6.34047, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_apasw")
+
+[node name="World" type="Node" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="World"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 0.0067369, 0.999977, 0, -0.999977, 0.0067369, 0, 15.6941, 0)

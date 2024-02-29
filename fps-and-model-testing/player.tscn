@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://cbvkretx64o3f"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_dwsmk"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_cqa6b"]
+
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("cam_pivot")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000225067, -0.0062604, -0.015204)
+floor_stop_on_slope = false
+floor_block_on_wall = false
+floor_max_angle = 0.802851
+script = ExtResource("1_dwsmk")
+cam_pivot = NodePath("head")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+shape = SubResource("CapsuleShape3D_cqa6b")
+
+[node name="head" type="Node3D" parent="."]
+transform = Transform3D(0.999919, 0, 0.0127229, 0, 1, 0, -0.0127229, 0, 0.999919, 0, 0.879, 0)
+
+[node name="Camera3D" type="Camera3D" parent="head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.62391, 0)
+fov = 90.0
