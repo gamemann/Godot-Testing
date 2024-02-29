@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bn52diqxg8oxv"]
+
+[ext_resource type="Texture2D" uid="uid://qit1ifua5hgd" path="res://textures/PNG/Red/texture_09.png" id="1_vde6r"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hey71"]
+albedo_texture = ExtResource("1_vde6r")
+
+[node name="Step" type="Node3D"]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1.5, 0, 0, 0, 0.05, 0, 0, 0, 1.5, 0, 0, 0)
+use_collision = true
+collision_mask = 3
+material = SubResource("StandardMaterial3D_hey71")
