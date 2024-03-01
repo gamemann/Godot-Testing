@@ -1,15 +1,15 @@
 [gd_scene load_steps=14 format=3 uid="uid://cxjekay1a1b7d"]
 
-[ext_resource type="Script" path="res://main.gd" id="1_ey68o"]
-[ext_resource type="PackedScene" uid="uid://cbvkretx64o3f" path="res://player.tscn" id="2_htw4r"]
-[ext_resource type="Texture2D" uid="uid://c8vav8qcrnh8" path="res://textures/skybox/Cartoon Base NightSky Equirect.png" id="3_0big7"]
-[ext_resource type="PackedScene" uid="uid://bn52diqxg8oxv" path="res://props/step.tscn" id="3_oi3so"]
-[ext_resource type="Texture2D" uid="uid://cdy1h18prb505" path="res://textures/PNG/Orange/texture_02.png" id="4_alupy"]
-[ext_resource type="PackedScene" uid="uid://3syac2rr5yj7" path="res://props/move_block.tscn" id="5_ekhm7"]
-[ext_resource type="Texture2D" uid="uid://dx35tdutxk717" path="res://textures/PNG/Green/texture_01.png" id="5_yvrwm"]
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_ttalj"]
+[ext_resource type="PackedScene" uid="uid://cbvkretx64o3f" path="res://scenes/player/player.tscn" id="2_fdmte"]
+[ext_resource type="Texture2D" uid="uid://c8vav8qcrnh8" path="res://textures/skybox/Cartoon Base NightSky Equirect.png" id="3_c32ml"]
+[ext_resource type="PackedScene" uid="uid://bn52diqxg8oxv" path="res://props/step.tscn" id="4_1fuug"]
+[ext_resource type="PackedScene" path="res://props/move_block.tscn" id="5_jl61y"]
+[ext_resource type="Texture2D" uid="uid://cdy1h18prb505" path="res://textures/PNG/Orange/texture_02.png" id="6_kro6p"]
+[ext_resource type="Texture2D" uid="uid://dx35tdutxk717" path="res://textures/PNG/Green/texture_01.png" id="7_8q2ut"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_6fs3o"]
-panorama = ExtResource("3_0big7")
+panorama = ExtResource("3_c32ml")
 
 [sub_resource type="Sky" id="Sky_ve6ko"]
 sky_material = SubResource("PanoramaSkyMaterial_6fs3o")
@@ -23,18 +23,18 @@ ambient_light_color = Color(0.180392, 0.0313726, 0, 1)
 reflected_light_source = 2
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c4ure"]
-albedo_texture = ExtResource("4_alupy")
+albedo_texture = ExtResource("6_kro6p")
 uv1_triplanar = true
 uv1_world_triplanar = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wrhes"]
-albedo_texture = ExtResource("5_yvrwm")
+albedo_texture = ExtResource("7_8q2ut")
 
 [sub_resource type="PrismMesh" id="PrismMesh_ktiu8"]
 
 [node name="Main" type="Node"]
-script = ExtResource("1_ey68o")
-player = ExtResource("2_htw4r")
+script = ExtResource("1_ttalj")
+player = ExtResource("2_fdmte")
 
 [node name="World" type="Node" parent="."]
 
@@ -47,25 +47,25 @@ shadow_enabled = true
 
 [node name="Props" type="Node3D" parent="."]
 
-[node name="Steps" parent="Props" instance=ExtResource("3_oi3so")]
+[node name="Steps" parent="Props" instance=ExtResource("4_1fuug")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.85517, 0.200835, -0.454558)
 
-[node name="Steps2" parent="Props" instance=ExtResource("3_oi3so")]
+[node name="Steps2" parent="Props" instance=ExtResource("4_1fuug")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.85517, 0.560784, 1.08336)
 
-[node name="Steps3" parent="Props" instance=ExtResource("3_oi3so")]
+[node name="Steps3" parent="Props" instance=ExtResource("4_1fuug")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.85517, 0.945925, 2.88134)
 
-[node name="Steps4" parent="Props" instance=ExtResource("3_oi3so")]
+[node name="Steps4" parent="Props" instance=ExtResource("4_1fuug")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.768182, 1.46292, 2.88134)
 
-[node name="Steps5" parent="Props" instance=ExtResource("3_oi3so")]
+[node name="Steps5" parent="Props" instance=ExtResource("4_1fuug")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.768182, 1.63277, -1.51703)
 
-[node name="Steps6" parent="Props" instance=ExtResource("3_oi3so")]
+[node name="Steps6" parent="Props" instance=ExtResource("4_1fuug")]
 transform = Transform3D(3.23751, 0, 0, 0, 1, 0, 0, 0, 2.21433, 0.768182, 1.63277, -5.51775)
 
-[node name="MoveBlock" parent="Props" instance=ExtResource("5_ekhm7")]
+[node name="MoveBlock" parent="Props" instance=ExtResource("5_jl61y")]
 
 [node name="stage" type="Node3D" parent="."]
 
@@ -128,31 +128,3 @@ material = SubResource("StandardMaterial3D_wrhes")
 transform = Transform3D(1.18516, 4.23412, 43.7208, -0.646548, 7.76142, -23.8512, -12.1412, 1.97617e-07, 5.53795, 31.9307, -14.8717, 10.5868)
 use_collision = true
 mesh = SubResource("PrismMesh_ktiu8")
-
-[node name="UI" type="SubViewportContainer" parent="."]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Speed_Port" type="SubViewport" parent="UI"]
-transparent_bg = true
-handle_input_locally = false
-render_target_update_mode = 4
-
-[node name="Speed_Label" type="Label" parent="UI/Speed_Port"]
-offset_right = 40.0
-offset_bottom = 23.0
-text = "Speed: 0"
-
-[node name="FPS_Port" type="SubViewport" parent="UI"]
-transparent_bg = true
-handle_input_locally = false
-render_target_update_mode = 4
-
-[node name="Label" type="Label" parent="UI/FPS_Port"]
-offset_top = 28.555
-offset_right = 45.0
-offset_bottom = 51.555
-text = "FPS: 0"

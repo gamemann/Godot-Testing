@@ -1,0 +1,33 @@
+[gd_scene load_steps=2 format=3 uid="uid://bfp5wbfv8mu1g"]
+
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_14hth"]
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1_14hth")
+
+[node name="Menu" type="Node2D" parent="."]
+position = Vector2(36.18, 13.365)
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Menu"]
+offset_right = 512.0
+offset_bottom = 512.0
+
+[node name="Main" type="SubViewport" parent="Menu/SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+render_target_update_mode = 4
+
+[node name="Menu" type="Control" parent="Menu/SubViewportContainer/Main"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="MenuButton" type="MenuButton" parent="Menu/SubViewportContainer/Main"]
+offset_right = 8.0
+offset_bottom = 8.0
+text = "Play Test 1"
+
+[node name="Map" type="Node3D" parent="."]
+
+[connection signal="pressed" from="Menu/SubViewportContainer/Main/MenuButton" to="." method="_on_menu_button_pressed"]

@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://bwtoso7dwv4ym"]
+
+[node name="Ui" type="Node3D"]
+
+[node name="Container" type="SubViewportContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Speed" type="SubViewport" parent="Container"]
+transparent_bg = true
+handle_input_locally = false
+render_target_update_mode = 4
+
+[node name="Label" type="Label" parent="Container/Speed"]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Speed: 0"
+
+[node name="FPS" type="SubViewport" parent="Container"]
+transparent_bg = true
+handle_input_locally = false
+render_target_update_mode = 4
+
+[node name="Label" type="Label" parent="Container/FPS"]
+offset_top = 28.555
+offset_right = 45.0
+offset_bottom = 51.555
+text = "FPS: 0"
