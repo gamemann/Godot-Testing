@@ -2,10 +2,13 @@ extends Node
 
 @export var player: PackedScene
 
-# Called when the node enters the scene tree for the first time.
+var fps_label : Label
+
 func _ready():
+	# Capture mouse.
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	
+	# Spawn player into the game.
 	print("Spawning in player")
 	var ply = player.instantiate()
 	
@@ -13,7 +16,9 @@ func _ready():
 	ply.position = loc
 	
 	add_child(ply)
+	
+	fps_label = get_node("/root/Main/UI/FPS_Port/Label")
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	if fps_label:
+		fps_label.text = "FPS: %s" % Engine.get_frames_per_second()

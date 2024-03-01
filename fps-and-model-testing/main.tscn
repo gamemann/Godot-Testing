@@ -1,15 +1,18 @@
-[gd_scene load_steps=9 format=3 uid="uid://cxjekay1a1b7d"]
+[gd_scene load_steps=14 format=3 uid="uid://cxjekay1a1b7d"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_ey68o"]
 [ext_resource type="PackedScene" uid="uid://cbvkretx64o3f" path="res://player.tscn" id="2_htw4r"]
+[ext_resource type="Texture2D" uid="uid://c8vav8qcrnh8" path="res://textures/skybox/Cartoon Base NightSky Equirect.png" id="3_0big7"]
 [ext_resource type="PackedScene" uid="uid://bn52diqxg8oxv" path="res://props/step.tscn" id="3_oi3so"]
 [ext_resource type="Texture2D" uid="uid://cdy1h18prb505" path="res://textures/PNG/Orange/texture_02.png" id="4_alupy"]
+[ext_resource type="PackedScene" uid="uid://3syac2rr5yj7" path="res://props/move_block.tscn" id="5_ekhm7"]
+[ext_resource type="Texture2D" uid="uid://dx35tdutxk717" path="res://textures/PNG/Green/texture_01.png" id="5_yvrwm"]
 
-[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_n25sq"]
-turbidity = 34.14
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_6fs3o"]
+panorama = ExtResource("3_0big7")
 
 [sub_resource type="Sky" id="Sky_ve6ko"]
-sky_material = SubResource("PhysicalSkyMaterial_n25sq")
+sky_material = SubResource("PanoramaSkyMaterial_6fs3o")
 
 [sub_resource type="Environment" id="Environment_sm546"]
 background_mode = 2
@@ -24,6 +27,11 @@ albedo_texture = ExtResource("4_alupy")
 uv1_triplanar = true
 uv1_world_triplanar = true
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wrhes"]
+albedo_texture = ExtResource("5_yvrwm")
+
+[sub_resource type="PrismMesh" id="PrismMesh_ktiu8"]
+
 [node name="Main" type="Node"]
 script = ExtResource("1_ey68o")
 player = ExtResource("2_htw4r")
@@ -35,7 +43,6 @@ environment = SubResource("Environment_sm546")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="World"]
 transform = Transform3D(1, 0, 0, 0, 0.0067369, 0.999977, 0, -0.999977, 0.0067369, 0, 15.6941, 0)
-light_color = Color(0.32549, 0.266667, 0, 1)
 shadow_enabled = true
 
 [node name="Props" type="Node3D" parent="."]
@@ -58,9 +65,94 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.768182, 1.63277, -1.51703)
 [node name="Steps6" parent="Props" instance=ExtResource("3_oi3so")]
 transform = Transform3D(3.23751, 0, 0, 0, 1, 0, 0, 0, 2.21433, 0.768182, 1.63277, -5.51775)
 
+[node name="MoveBlock" parent="Props" instance=ExtResource("5_ekhm7")]
+
 [node name="stage" type="Node3D" parent="."]
 
 [node name="CSGBox3D" type="CSGBox3D" parent="stage"]
 transform = Transform3D(21.5856, 0, 0, 0, 0.276576, 0, 0, 0, 57.102, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_c4ure")
 use_collision = true
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="stage"]
+transform = Transform3D(21.5856, 0, 0, 0, 0.276576, 0, 0, 0, 57.102, 70.4512, -15.3608, 0)
+material_override = SubResource("StandardMaterial3D_c4ure")
+use_collision = true
+size = Vector3(5.51477, 1, 1)
+
+[node name="CSGTorus3D" type="CSGTorus3D" parent="stage"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.9175, -0.730273, -9.15612)
+use_collision = true
+material = SubResource("StandardMaterial3D_wrhes")
+
+[node name="CSGTorus3D2" type="CSGTorus3D" parent="stage"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.9175, -0.730273, -11.7361)
+use_collision = true
+material = SubResource("StandardMaterial3D_wrhes")
+
+[node name="CSGTorus3D3" type="CSGTorus3D" parent="stage"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.0494, -3.95269, -11.7361)
+use_collision = true
+material = SubResource("StandardMaterial3D_wrhes")
+
+[node name="CSGTorus3D4" type="CSGTorus3D" parent="stage"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.218, -3.95269, -7.60264)
+use_collision = true
+material = SubResource("StandardMaterial3D_wrhes")
+
+[node name="CSGTorus3D6" type="CSGTorus3D" parent="stage"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.986, -5.77263, -5.36774)
+use_collision = true
+outer_radius = 2.20054
+material = SubResource("StandardMaterial3D_wrhes")
+
+[node name="CSGTorus3D7" type="CSGTorus3D" parent="stage"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.2941, -8.67638, -5.36774)
+use_collision = true
+outer_radius = 2.20054
+material = SubResource("StandardMaterial3D_wrhes")
+
+[node name="CSGTorus3D8" type="CSGTorus3D" parent="stage"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.525, -11.1498, -0.967967)
+use_collision = true
+outer_radius = 2.20054
+material = SubResource("StandardMaterial3D_wrhes")
+
+[node name="CSGTorus3D5" type="CSGTorus3D" parent="stage"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.83, -3.95269, -11.4547)
+use_collision = true
+outer_radius = 2.01224
+material = SubResource("StandardMaterial3D_wrhes")
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="stage"]
+transform = Transform3D(1.18516, 4.23412, 43.7208, -0.646548, 7.76142, -23.8512, -12.1412, 1.97617e-07, 5.53795, 31.9307, -14.8717, 10.5868)
+use_collision = true
+mesh = SubResource("PrismMesh_ktiu8")
+
+[node name="UI" type="SubViewportContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Speed_Port" type="SubViewport" parent="UI"]
+transparent_bg = true
+handle_input_locally = false
+render_target_update_mode = 4
+
+[node name="Speed_Label" type="Label" parent="UI/Speed_Port"]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Speed: 0"
+
+[node name="FPS_Port" type="SubViewport" parent="UI"]
+transparent_bg = true
+handle_input_locally = false
+render_target_update_mode = 4
+
+[node name="Label" type="Label" parent="UI/FPS_Port"]
+offset_top = 28.555
+offset_right = 45.0
+offset_bottom = 51.555
+text = "FPS: 0"

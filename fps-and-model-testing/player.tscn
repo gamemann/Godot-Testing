@@ -14,7 +14,6 @@ script = ExtResource("1_dwsmk")
 cam_pivot = NodePath("head")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(0.4, 0, 0, 0, 1, 0, 0, 0, 0.4, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_cqa6b")
 
 [node name="head" type="Node3D" parent="."]
@@ -22,6 +21,6 @@ transform = Transform3D(0.999919, 0, 0.0127229, 0, 1, 0, -0.0127229, 0, 0.999919
 
 [node name="Camera3D" type="Camera3D" parent="head"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0132761, 0)
-fov = 90.0
+fov = 79.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
