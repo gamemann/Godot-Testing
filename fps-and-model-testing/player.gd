@@ -1,12 +1,11 @@
 extends CharacterBody3D
 
 @export_category("Movement")
-@export var BASE_SPEED := 1.0
-@export var WALK_SPEED := 0.7
-@export var CROUCH_SPEED := 0.5
-
 @export var MAX_G_SPEED := 5.0
-@export var MAX_G_ACCEL := 20.0 * MAX_G_SPEED
+@export var MAX_W_SPEED := 3.0
+@export var MAX_C_SPEED := 3.0
+
+@export var MAX_G_ACCEL := 20.0
 
 @export var MAX_AIR_SPEED := 0.5
 @export var MAX_AIR_ACCEL := 100.0
@@ -60,8 +59,7 @@ func _physics_process(delta):
 	else:
 		head.position.y = lerp(head.position.y, 0.72, delta * LERP_SPEED)
 	
-	#if vel_planar.is_zero_approx():
-		#vel_planar = Vector2(velocity.x, velocity.z)
+	vel_planar = Vector2(velocity.x, velocity.z)
 	
 	var vel_vertical := velocity.y
 	
@@ -77,24 +75,39 @@ func _physics_process(delta):
 	if on_floor and (Input.is_action_pressed("player_jump") or Input.is_action_just_released("player_jump")):
 		on_floor = false
 		vel_vertical = JUMP_FORCE
+	
+	# Determine the max ground speed.
+	var max_ground_speed = MAX_G_SPEED
+	
+	if is_crouching:
+		max_ground_speed = MAX_C_SPEED
+	elif is_walking:
+		max_ground_speed = MAX_W_SPEED
 		
+	# Check if player is on the floor.
 	if not on_floor:
+		# Apply gravity while in the air.
 		vel_vertical -= GRAVITY_FORCE * delta
 	else:
-		vel_planar -= vel_planar.normalized() * delta * (MAX_G_ACCEL / 2.0)
+		vel_planar -= vel_planar.normalized() * delta * ((MAX_G_ACCEL * max_ground_speed) / 2.0)
 		
 		if vel_planar.length_squared() < 1.0 and wish_dir.length_squared() < 0.01:
 			vel_planar = Vector2.ZERO
-			
+	
+	# Retrieve the current speed.
 	var current_speed = vel_planar.dot(wish_dir)
 	
-	var max_speed = MAX_G_SPEED if on_floor else MAX_AIR_SPEED
-	var max_accel = MAX_G_ACCEL if on_floor else MAX_AIR_ACCEL
+	# Calculate max speed and acceleration.
+	var max_speed = max_ground_speed if on_floor else MAX_AIR_SPEED
+	var max_accel = (MAX_G_ACCEL * max_ground_speed) if on_floor else MAX_AIR_ACCEL
 	
+	# Calculate speed to add.
 	var add_speed = clamp(max_speed - current_speed, 0.0, max_accel * delta)
 	
-	vel_planar.x = lerp(velocity.x, vel_planar.x + (wish_dir.x * add_speed), delta * LERP_SPEED)
-	vel_planar.y = lerp(velocity.z, vel_planar.y + (wish_dir.y * add_speed), delta * LERP_SPEED)
+	# Determine the velocity to add.
+	# We use lerp() to smooth
+	var new_vel_planar = vel_planar + (wish_dir * add_speed) 
+	vel_planar = lerp(Vector2(velocity.x, velocity.z), new_vel_planar, delta * LERP_SPEED)
 	
 	velocity = Vector3(vel_planar.x, vel_vertical, vel_planar.y)
 	
