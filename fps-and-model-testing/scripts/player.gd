@@ -47,7 +47,7 @@ var speed_label
 
 func _ready():
 	# Retrieve current speed label.
-	speed_label = get_node("/root/Main/UI/Speed/Label")
+	speed_label = get_node("/root/Main/Ui/Container/Speed/Label")
 
 func _check_floor() -> bool:
 	var origin = global_position + FLOOR_RAY_POS
